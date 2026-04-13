@@ -44,7 +44,6 @@ func main() {
 }
 
 func rotaUsuarios(w http.ResponseWriter, r *http.Request) {
-	// CORS
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
@@ -104,7 +103,7 @@ func rotaUsuarios(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(u)
 
 	case r.Method == http.MethodDelete && len(nome) > 1:
-		nome = nome[1:] // remove a barra inicial
+		nome = nome[1:] 
 		res, err := db.Exec("DELETE FROM usuarios WHERE nome = ?", nome)
 		if err != nil {
 			http.Error(w, "Erro ao deletar: "+err.Error(), 500)
